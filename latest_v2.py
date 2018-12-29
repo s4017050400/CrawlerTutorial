@@ -77,7 +77,6 @@ def replace_all(text,dic):
 
 def dataintxt(meta):
     content1=str(meta['push']+'\t'+ meta['title']+'\t'+  meta['date']+'\t'+  meta['author'])
-    url=urllib.parse.urljoin('https://www.ptt.cc/', meta['link'])
     title=str(meta["title"])
     try: #name the file name
         fout=open('%s.txt'%title,'wt',encoding = 'utf8') #,encoding = 'utf8' windows command 預設是 950 有些字會認不得
@@ -86,14 +85,18 @@ def dataintxt(meta):
         title=replace_all(str(meta["title"]),od)#.replace("%s"%rp,"_")
         fout=open('%s.txt'%title,'wt',encoding = 'utf8') #,encoding = 'utf8' windows command 預設是 950 有些字會認不得
     #print(r.text)
-    r=fetch(url)
-    fout.write(content1+r.text)
+    try: #insert the content to txt
+        url=urllib.parse.urljoin('https://www.ptt.cc/', meta['link'])
+        r=fetch(url)
+        fout.write(content1+r.text)
+    except:
+        pass
     fout.close()
     
     
 
 start_url = 'https://www.ptt.cc/bbs/Stock/index.html'
-metadata = get_paged_meta(start_url, num_pages=1)
+metadata = get_paged_meta(start_url, num_pages=10)
 for meta in metadata:
     #pretty_print(meta['push'], meta['title'], meta['date'], meta['author'])
     dataintxt(meta)
