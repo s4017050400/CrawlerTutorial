@@ -76,19 +76,24 @@ def replace_all(text,dic):
     return text
 
 def dataintxt(meta):
+    content1=str(meta['push']+'\t'+ meta['title']+'\t'+  meta['date']+'\t'+  meta['author'])
+    url=urllib.parse.urljoin('https://www.ptt.cc/', meta['link'])
     title=str(meta["title"])
-    try:
-        fout=open('%s.txt'%title,'wt')
+    try: #name the file name
+        fout=open('%s.txt'%title,'wt',encoding = 'utf8') #,encoding = 'utf8' windows command 預設是 950 有些字會認不得
     except :
         od=OrderedDict([("%s"%i,"_") for i in '\/:*?"<>|'])
         title=replace_all(str(meta["title"]),od)#.replace("%s"%rp,"_")
-        fout=open('%s.txt'%title,'wt')
-    content=str(meta['push']+'\t'+ meta['title']+'\t'+  meta['date']+'\t'+  meta['author'])
-    fout.write(content)
-    fout.close()  #store file into txt
+        fout=open('%s.txt'%title,'wt',encoding = 'utf8') #,encoding = 'utf8' windows command 預設是 950 有些字會認不得
+    #print(r.text)
+    r=fetch(url)
+    fout.write(content1+r.text)
+    fout.close()
+    
+    
 
 start_url = 'https://www.ptt.cc/bbs/Stock/index.html'
-metadata = get_paged_meta(start_url, num_pages=5)
+metadata = get_paged_meta(start_url, num_pages=1)
 for meta in metadata:
     #pretty_print(meta['push'], meta['title'], meta['date'], meta['author'])
     dataintxt(meta)
