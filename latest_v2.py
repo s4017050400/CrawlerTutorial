@@ -83,8 +83,8 @@ def dataintxt(meta):
         od=OrderedDict([("%s"%i,"_") for i in '\/:*?"<>|'])
         title=replace_all(str(meta["title"]),od)#.replace("%s"%rp,"_")
         fout=open('%s.txt'%title,'wt')
-    context=str(meta['push']+'\t'+ meta['title']+'\t'+  meta['date']+'\t'+  meta['author'])
-    fout.write(context)
+    content=str(meta['push']+'\t'+ meta['title']+'\t'+  meta['date']+'\t'+  meta['author'])
+    fout.write(content)
     fout.close()  #store file into txt
 
 start_url = 'https://www.ptt.cc/bbs/Stock/index.html'
