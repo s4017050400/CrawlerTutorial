@@ -64,6 +64,24 @@ def calc_len(string):
     return sum(chr_width(ord(c)) for c in string)
 
 #________________________________________________________________________
+
+#loop for date
+from datetime import date
+from datetime import timedelta
+
+
+def datebyyear(year):
+    #today=date.today() #which is like datetime.date(2018,10,3)
+    start = date(2004,2,11) #TWSE 股市開始給抓的日子
+    one_day=timedelta(days=1) #one day which can be plused
+
+    for i in range(0,365*year): #1+365天
+        date1=start+i*one_day
+        standard=date1.isoformat().translate({ord(c):None for c in '-'})#date.isoformat() is 2018-10-03
+        print(standard)
+        
+#________________________________________________________________________
+
 #result:
 
 ![image] (https://github.com/s4017050400/CrawlerTutorial/blob/master/TWSE/%E7%88%AC%E8%9F%B21.PNG)
