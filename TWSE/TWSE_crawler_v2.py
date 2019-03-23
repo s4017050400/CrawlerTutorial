@@ -19,7 +19,7 @@ def sort_out(datestr):
         block=i.split('",')
         if len(block) == 17 and i[0] != '=':
             del block[16] #del '\r'
-            fstock=(block[0]+block[1]).translate({ord(c): None for c in '"'}) #1101台泥
+            fstock=(block[0]+block[1]).translate({ord(c): None for c in '"'}) #1101台泥 把"取代掉
             path= r'C:/Users/s4017/Desktop/a/'+ str(fstock) + '.txt' #prefix the string with r (to produce a raw string)
             fout=open(path,'a') #a=append  w=write
             fout.write(datestr) #在最前排寫入當日股票日期
