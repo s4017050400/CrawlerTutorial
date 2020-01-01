@@ -72,7 +72,7 @@ from datetime import timedelta
 
 def datebyyear(year):
     #today=date.today() #which is like datetime.date(2018,10,3)
-    start = date(2006,2,11) #TWSE 股市開始給抓的日子
+    start = date(2004,2,11) #TWSE 股市開始給抓的日子
     one_day=timedelta(days=1) #one day which can be plused
     result = [] #where for loop date store in 
 
